@@ -16,9 +16,9 @@ namespace Projeto_Loc_Senai
 {
     public partial class TelaLogin : Form
     {
-        //Thread f1 ainda nao esta sendo usado para abrir tela adm, esperar nicolas fazer verificacao de senha para conseguir abrir tela adm
-        //Thread f1;
+        Thread f1;
         Thread f2;
+        User us = new User();
 
         public TelaLogin()
         {
@@ -82,6 +82,12 @@ namespace Projeto_Loc_Senai
             txtsenha_adm.PasswordChar = '•';
         }
 
+        //Fechar a Tela Login e Abrir Adm
+        private void AbrirJan(object obj)
+        {
+            Application.Run(new TelaAdm());
+        }
+
         //Fechar a Tela Login e Abrir Visitante
         private void AbrirJan2(object obj)
         {
@@ -98,7 +104,24 @@ namespace Projeto_Loc_Senai
 
         private void btnlogin_adm_Click(object sender, EventArgs e)
         {
+            controller_login control = new controller_login();
+            us.setsenha(txtsenha_adm.Text);
+            us.setusuario(txtusuario_adm.Text);
 
+            bool logado = control.login(us);
+            if (logado == true)
+            {
+                this.Close();
+                f1 = new Thread(AbrirJan);
+                f1.SetApartmentState(ApartmentState.STA);
+                f1.Start();
+            }
+            else
+            {
+                MessageBox.Show("login ou senha incorretos");
+
+            }
+           
         }
     }
 }

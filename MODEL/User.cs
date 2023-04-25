@@ -11,6 +11,7 @@ namespace MODEL
         public int CodigoUsuario;
         string nome_funcionario;
         string senha_funcionario;
+        string usuario;
         
         public User()
         {
@@ -30,7 +31,15 @@ namespace MODEL
         {
             return this.nome_funcionario;
         }
-        public string Getemail()
+        public string Getusuario()
+        {
+            return this.usuario;
+        }
+        public string Getsenha()
+        {
+            return this.senha_funcionario;
+        }
+        public string Getemail()//nicolas, você está muito no crack
         {
             return this.senha_funcionario;
         }
@@ -44,6 +53,14 @@ namespace MODEL
         {
             this.senha_funcionario = email;
         }
-      
+        public void setsenha(string senha)
+        {
+            this.senha_funcionario = senha;
+        }
+        public void setusuario(string usuario)
+        {
+            this.usuario = usuario;
+        }
+
     }
 }
